@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>My PDF Viewer</title>
+  <title>MagCPI Viewer</title>
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js">
   </script>
@@ -42,13 +42,23 @@
     </div>
  
     <script>
+      
+      function getUrlParam(parameter, defaultvalue){
+        var urlparameter = defaultvalue;
+        if(window.location.href.indexOf(parameter) > -1){
+            urlparameter = getUrlVars()[parameter];
+            }
+              return urlparameter;
+            }
         var myState = {
             pdf: null,
             currentPage: 1,
             zoom: 1
         }
+        
+        var documentName = getUrlParam("fileurl", "./adventurelib_doc.pdf")
       
-        pdfjsLib.getDocument('./adventurelib_doc.pdf').then((pdf) => {
+        pdfjsLib.getDocument(documentName).then((pdf) => {
       
             myState.pdf = pdf;
             render();
